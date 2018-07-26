@@ -17,7 +17,7 @@ class LocationsMenu extends Component {
                 <div id="places-list" className="locations-list">
                     <a className="close-button" onClick={this.closeSideList}>&times;</a>
                     <form>
-                        <input type="text" name="search" />
+                        <input type="text" name="search" placeholder="filter places"/>
                     </form>
                     {this.props.places.map(place =>
                         <a className="list-item" key={place.title}> { place.title } </a> 
