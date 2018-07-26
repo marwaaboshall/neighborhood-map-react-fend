@@ -17,6 +17,12 @@ html, body, .App, #root {
   padding-left: 25px;
   font-size: 20px;
 }
+.nav-bar span {
+  cursor: pointer;
+}
+.nav-bar span:hover {
+  color: gray;
+}
 
 .locations-list {
   top: 0;
@@ -32,8 +38,9 @@ html, body, .App, #root {
 }
 .locations-list input {
   padding: 10px 10px 10px 10px;
-  width: 90%;
+  width: 92%;
   font-size: 16px;
+  border-radius: 5px;
 }
 .locations-list form {
   text-align: center;
@@ -47,7 +54,9 @@ html, body, .App, #root {
   transition: 0.1s;
   cursor: pointer;
 }
-
+.locations-list .list-item {
+  border-bottom: 1px solid gray;
+}
 .locations-list a:hover {
   color: gray;
 }
@@ -56,5 +65,5 @@ html, body, .App, #root {
   position: absolute;
   top: 0;
   right: 5px;
-  font-size: 48px;
+  font-size: 40px;
 }

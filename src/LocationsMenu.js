@@ -20,7 +20,7 @@ class LocationsMenu extends Component {
                         <input type="text" name="search" />
                     </form>
                     {this.props.places.map(place =>
-                        <a key={place.title}> { place.title } </a> 
+                        <a className="list-item" key={place.title}> { place.title } </a> 
                     )}
                 </div>
                 <div className="nav-bar">
