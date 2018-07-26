@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Park Ave Penthouse",
+        "location": {
+            "lat": 40.7413549,
+            "lng": -73.9980244
+        }
+    },
+    {
+        "title": "Chelsea Loft",
+        "location": {
+            "lat": 40.7444883,
+            "lng": -73.9949465
+        }
+    },
+    {
+        "title": "Union Square Open Floor Plan",
+        "location": {
+            "lat": 40.7347062,
+            "lng": -73.9895759
+        }
+    },
+    {
+        "title": "East Village Hip Studio",
+        "location": {
+            "lat": 40.7281777,
+            "lng": -74.0089934
+        }
+    },
+    {
+        "title": "Newyork Health and Racquet Club",
+        "location": {
+            "lat": 40.742079,
+            "lng": -73.99251
+        }
+    }
+]
