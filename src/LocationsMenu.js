@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 
 class LocationsMenu extends Component {
 
+    state = {
+        sideMenuOpen: false
+    }
+
     openSideList = () => {
-        document.getElementById("places-list").style.width = "400px";
-        console.log("open");
+        document.getElementById("places-list").style.visibility = "visible";
     }
     closeSideList = () => {
-        document.getElementById("places-list").style.width = "0";
-        console.log("close");
+        document.getElementById("places-list").style.visibility = "hidden";
     }
 
     render() {

@@ -33,7 +33,7 @@ class Map extends Component {
             });
             this.setState({ marker: marker });
             
-            markers.push(this.state.marker);
+            markers.push(marker);
 
             marker.addListener('click', function () {
                 thisBind.populateInfoWindow(this, infowindow);

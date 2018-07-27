@@ -1,5 +1,6 @@
 html, body, .App, #root {
   height: 100%;
+  width: 100%;
 }
 
 #map {
@@ -29,7 +30,7 @@ html, body, .App, #root {
   left: 0;
   padding-top: 70px;
   height: 100%;
-  width: 0;
+  width: 400px;
   position: fixed;
   z-index: 1;
   background-color: black;
@@ -66,4 +67,23 @@ html, body, .App, #root {
   top: 0;
   right: 5px;
   font-size: 40px;
+}
+
+.visible-item {
+  visibility: visible;
+}
+
+@media screen and (max-width: 750px) {
+  .locations-list {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .locations-list {
+    width: 80%;
+  }
+  .locations-list input {
+    width: 90%;
+  }
 }
