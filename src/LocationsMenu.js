@@ -4,11 +4,25 @@ import sortBy from 'sort-by';
 
 class LocationsMenu extends Component {
     state = {
-        query: ''
+        query: '',
+        filteredLocations: []
     }
 
+    componentDidMount() {
+        this.setState({ filteredLocations: this.props.places });
+    }
     updateQuery = (query) => {
         this.setState({ query: query.trim()})
+        let filteredLocations;
+        if (query) {
+            const match = new RegExp(escapeRegExp(query), 'i');
+            filteredLocations = this.props.places.filter((location) => match.test(location.title));
+        } else {
+            filteredLocations = this.props.places;
+        }
+
+        filteredLocations.sort(sortBy('name'));
+        this.setState({ filteredLocations });
     }
 
     openSideList = () => {
@@ -19,17 +33,6 @@ class LocationsMenu extends Component {
     }
 
     render() {
-
-        let filteredLocations;
-        if (this.state.query) {
-            const match = new RegExp(escapeRegExp(this.state.query), 'i');
-            filteredLocations = this.props.places.filter((location) => match.test(location.title));
-        } else {
-            filteredLocations = this.props.places;
-        }
-
-        filteredLocations.sort(sortBy('name'));
-
         return(
             <div>
                 <div id="places-list" className="locations-list">
@@ -37,7 +40,7 @@ class LocationsMenu extends Component {
                     <form>
                         <input type="text" name="search" placeholder="filter places" value={ this.state.query } onChange={ (event) => this.updateQuery(event.target.value) }/>
                     </form>
-                    {filteredLocations.map(place =>
+                    {this.state.filteredLocations.map(place =>
                         <a className="list-item" key={place.title}> { place.title } </a> 
                     )}
                 </div>
