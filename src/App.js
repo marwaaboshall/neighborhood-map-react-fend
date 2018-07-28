@@ -6,6 +6,7 @@ import * as locations from './locations'
 import LocationsMenu from './LocationsMenu';
 
 class App extends Component {
+  
   state = {
     locations: locations
   }

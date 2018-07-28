@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import escapeRegExp from 'escape-string-regexp';
+import sortBy from 'sort-by';
 
 class LocationsMenu extends Component {
-
     state = {
-        sideMenuOpen: false
+        query: '',
+        filteredLocations: []
+    }
+
+    updateQuery = (query) => {
+        this.setState({ query: query.trim()})
     }
 
     openSideList = () => {
@@ -14,14 +20,25 @@ class LocationsMenu extends Component {
     }
 
     render() {
+
+        let filteredLocations;
+        if (this.state.query) {
+            const match = new RegExp(escapeRegExp(this.state.query), 'i');
+            filteredLocations = this.props.places.filter((location) => match.test(location.title));
+        } else {
+            filteredLocations = this.props.places;
+        }
+
+        filteredLocations.sort(sortBy('name'));
+        
         return(
             <div>
                 <div id="places-list" className="locations-list">
                     <a className="close-button" onClick={this.closeSideList}>&times;</a>
                     <form>
-                        <input type="text" name="search" placeholder="filter places"/>
+                        <input type="text" name="search" placeholder="filter places" value={ this.state.query } onChange={ (event) => this.updateQuery(event.target.value) }/>
                     </form>
-                    {this.props.places.map(place =>
+                    {filteredLocations.map(place =>
                         <a className="list-item" key={place.title}> { place.title } </a> 
                     )}
                 </div>

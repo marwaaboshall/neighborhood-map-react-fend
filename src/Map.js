@@ -4,20 +4,22 @@ class Map extends Component {
 
     state = {
         map: '',
-        marker: '',
-        infoWindowOpen: false
+        marker: ''
     }
 
     componentDidMount() {
+        this.initMap();
+    }
+    
+    initMap() {
         let thisBind = this;
         let markers =  [];
-        let infowindow = new window.google.maps.InfoWindow({
-            content: 'Do you ever feel like an InfoWindow, floating through the wind,' + ' ready to start again?'
-        });
+        let infowindow = new window.google.maps.InfoWindow();
         const map = new window.google.maps.Map(document.getElementById('map'), {
             zoom: 12,
             center: {lat: 40.7413549, lng: -73.9980244}
         });
+
         this.setState({ map: map });
 
         for (let i = 0; i < this.props.mapLocations.length; i++) {
@@ -40,7 +42,6 @@ class Map extends Component {
             });
         }
     }
-
     populateInfoWindow(marker, infowindow) {
         if (infowindow.marker !== marker) {
             console.log("here");
