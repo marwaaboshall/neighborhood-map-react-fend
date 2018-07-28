@@ -4,8 +4,7 @@ import sortBy from 'sort-by';
 
 class LocationsMenu extends Component {
     state = {
-        query: '',
-        filteredLocations: []
+        query: ''
     }
 
     updateQuery = (query) => {
@@ -15,7 +14,6 @@ class LocationsMenu extends Component {
     openSideList = () => {
         document.getElementById("places-list").style.visibility = "visible";
     }
-    
     closeSideList = () => {
         document.getElementById("places-list").style.visibility = "hidden";
     }
@@ -31,7 +29,7 @@ class LocationsMenu extends Component {
         }
 
         filteredLocations.sort(sortBy('name'));
-        
+
         return(
             <div>
                 <div id="places-list" className="locations-list">
