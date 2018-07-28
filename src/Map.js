@@ -10,7 +10,7 @@ class Map extends Component {
     componentDidMount() {
         this.initMap();
     }
-    
+
     initMap() {
         let thisBind = this;
         let markers =  [];

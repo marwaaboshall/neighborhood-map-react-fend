@@ -15,6 +15,7 @@ class LocationsMenu extends Component {
     openSideList = () => {
         document.getElementById("places-list").style.visibility = "visible";
     }
+    
     closeSideList = () => {
         document.getElementById("places-list").style.visibility = "hidden";
     }
