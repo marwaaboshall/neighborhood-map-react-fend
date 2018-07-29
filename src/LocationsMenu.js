@@ -22,19 +22,20 @@ class LocationsMenu extends Component {
             const match = new RegExp(escapeRegExp(query), 'i');
             filteredPlaces = this.props.places.filter((location) => match.test(location.title));
             filteredMarkers = this.props.markers.filter((marker) => match.test(marker.title));
-            this.markerVisible(this.props.markers, false);
-            this.markerVisible(filteredMarkers, true);
+            this.EnableMarkers(this.props.markers, false);
+            this.EnableMarkers(filteredMarkers, true);
         } else {
             filteredPlaces = this.props.places;
             filteredMarkers = this.props.markers;
-            this.markerVisible(this.props.markers, true);
+            this.EnableMarkers(this.props.markers, true);
         }
 
         filteredPlaces.sort(sortBy('name'));
         this.setState({ filteredPlaces });
         this.setState({ filteredMarkers });
     }
-    markerVisible = (markersArr, value) => {
+
+    EnableMarkers = (markersArr, value) => {
         for (var i = 0; i < markersArr.length; i++) {
             markersArr[i].setVisible(value);
         }
