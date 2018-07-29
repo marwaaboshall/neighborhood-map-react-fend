@@ -1,4 +1,4 @@
-html, body, .App, #root {
+html, body, .App, .map-container, #root {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
@@ -10,6 +10,7 @@ html, body, .App, #root {
   height: 100%;
   width: 100%;
 }
+
 .nav-bar {
   background: black;
   color: white;

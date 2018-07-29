@@ -5,24 +5,39 @@ import sortBy from 'sort-by';
 class LocationsMenu extends Component {
     state = {
         query: '',
-        filteredLocations: []
+        filteredPlaces: [],
+        filteredMarkers: []
     }
 
     componentDidMount() {
-        this.setState({ filteredLocations: this.props.places });
+        this.setState({ filteredPlaces: this.props.places });
+        this.setState({ filteredMarkers: this.props.markers });
     }
     updateQuery = (query) => {
         this.setState({ query: query.trim()})
-        let filteredLocations;
+        let filteredPlaces;
+        let filteredMarkers;
+
         if (query) {
             const match = new RegExp(escapeRegExp(query), 'i');
-            filteredLocations = this.props.places.filter((location) => match.test(location.title));
+            filteredPlaces = this.props.places.filter((location) => match.test(location.title));
+            filteredMarkers = this.props.markers.filter((marker) => match.test(marker.title));
+            this.markerVisible(this.props.markers, false);
+            this.markerVisible(filteredMarkers, true);
         } else {
-            filteredLocations = this.props.places;
+            filteredPlaces = this.props.places;
+            filteredMarkers = this.props.markers;
+            this.markerVisible(this.props.markers, true);
         }
 
-        filteredLocations.sort(sortBy('name'));
-        this.setState({ filteredLocations });
+        filteredPlaces.sort(sortBy('name'));
+        this.setState({ filteredPlaces });
+        this.setState({ filteredMarkers });
+    }
+    markerVisible = (markersArr, value) => {
+        for (var i = 0; i < markersArr.length; i++) {
+            markersArr[i].setVisible(value);
+        }
     }
 
     openSideList = () => {
@@ -40,7 +55,7 @@ class LocationsMenu extends Component {
                     <form>
                         <input type="text" name="search" placeholder="filter places" value={ this.state.query } onChange={ (event) => this.updateQuery(event.target.value) }/>
                     </form>
-                    {this.state.filteredLocations.map(place =>
+                    {this.state.filteredPlaces.map(place =>
                         <a className="list-item" key={place.title}> { place.title } </a> 
                     )}
                 </div>

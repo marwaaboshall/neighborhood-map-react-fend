@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import LocationsMenu from './LocationsMenu';
 
 class Map extends Component {
 
     state = {
         map: '',
-        marker: ''
+        marker: '',
+        markers: []
     }
 
     componentDidMount() {
@@ -35,28 +37,31 @@ class Map extends Component {
             });
             this.setState({ marker: marker });
             
-            markers.push(marker);
-
+            this.state.markers.push(marker);
             marker.addListener('click', function () {
                 thisBind.populateInfoWindow(this, infowindow);
             });
-        }
+        }        
     }
     populateInfoWindow(marker, infowindow) {
         if (infowindow.marker !== marker) {
-            console.log("here");
             infowindow.marker = marker;
             infowindow.setContent('<div>' + marker.title + '</div>');
             // infowindow.addListener('closeclick', function() {
             //     infowindow.setMarker(null);
             // });
-            console.log(infowindow.marker.title);
             infowindow.open(this.state.map, marker);
         }
     }
 
     render() {
-        return (<div id="map" />)
+        return (
+            <div className="map-container">
+                 <LocationsMenu places={this.props.mapLocations} markers={this.state.markers} map={this.state.map}/>
+                 <div id="map" />
+            </div>
+           
+        )
     }
 }
 
