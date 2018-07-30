@@ -22,6 +22,7 @@ html, body, .App, .map-container, #root {
 }
 .nav-bar span {
   cursor: pointer;
+  color: white;
 }
 .nav-bar span:hover {
   color: gray;
@@ -38,6 +39,10 @@ html, body, .App, .map-container, #root {
   background-color: black;
   overflow-x: hidden;
   transition: 0.2s;
+}
+.locations-list a {
+  color: white;
+  cursor: pointer;
 }
 .locations-list input {
   padding: 10px 10px 10px 10px;

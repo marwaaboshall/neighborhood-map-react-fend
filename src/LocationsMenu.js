@@ -6,7 +6,8 @@ class LocationsMenu extends Component {
     state = {
         query: '',
         filteredPlaces: [],
-        filteredMarkers: []
+        filteredMarkers: [],
+        currentMarker: ''
     }
 
     componentDidMount() {
@@ -15,6 +16,8 @@ class LocationsMenu extends Component {
     }
 
     updateQuery = (query) => {
+        //closing infowindow if displayed on the screen
+        this.props.infowindow.close();
         this.setState({ query: query.trim()})
         let filteredPlaces;
         let filteredMarkers;
@@ -41,9 +44,12 @@ class LocationsMenu extends Component {
         }
     }
 
-    selectMarker = () => {
-        console.log("clicked");
+    showInfoWindow = (place) => {
+        this.state.filteredMarkers.filter(marker => marker.title === place.title && this.setState({ currentMarker: marker }, () => {
+            this.props.enableInfoWindow(this.state.currentMarker, this.props.infowindow, this.props.map)
+        }));
     }
+
     openSideList = () => {
         document.getElementById("places-list").style.visibility = "visible";
     }
@@ -60,7 +66,11 @@ class LocationsMenu extends Component {
                         <input type="text" name="search" placeholder="filter places" value={ this.state.query } onChange={ (event) => this.updateQuery(event.target.value) }/>
                     </form>
                     {this.state.filteredPlaces.map(place =>
-                        <li className="list-item" key={place.title} onClick={ this.selectMarker }> { place.title } </li> 
+                        <li
+                          className="list-item"
+                          key={place.title}
+                          onClick={ () => this.showInfoWindow(place) }> { place.title } 
+                        </li> 
                     )}
                 </div>
                 <div className="nav-bar">
