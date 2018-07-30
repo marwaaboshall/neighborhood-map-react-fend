@@ -6,7 +6,8 @@ class Map extends Component {
     state = {
         map: '',
         marker: '',
-        markers: []
+        markers: [],
+        infoWindow: ''
     }
 
     componentDidMount() {
@@ -23,7 +24,7 @@ class Map extends Component {
         });
 
         this.setState({ map: map });
-
+        this.setState({ infoWindow: infowindow});
         for (let i = 0; i < this.props.mapLocations.length; i++) {
             let position = this.props.mapLocations[i].location;
             let title = this.props.mapLocations[i].title;
@@ -40,22 +41,25 @@ class Map extends Component {
             
             this.state.markers.push(marker);
             marker.addListener('click', function () {
-                thisBind.populateInfoWindow(this, infowindow);
+                thisBind.populateInfoWindow(this);
             });
         }        
     }
-    populateInfoWindow(marker, infowindow) {
-        if (infowindow.marker !== marker) {
-            infowindow.marker = marker;
-            infowindow.setContent('<div>' + marker.title + '</div>');
-            infowindow.open(this.state.map, marker);
+    populateInfoWindow(marker) {
+        if (this.state.infoWindow.marker !== marker) {
+            this.state.infoWindow.marker = marker;
+            this.state.infoWindow.setContent('<div>' + marker.title + '</div>');
+            this.state.infoWindow.open(this.state.map, marker);
         }
     }
 
     render() {
         return (
             <div className="map-container">
-                 <LocationsMenu places={this.props.mapLocations} markers={this.state.markers} map={this.state.map}/>
+                 <LocationsMenu 
+                    places={this.props.mapLocations}
+                    markers={this.state.markers}
+                    map={this.state.map}/>
                  <div id="map" />
             </div>
            

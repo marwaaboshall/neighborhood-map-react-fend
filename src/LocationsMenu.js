@@ -13,6 +13,7 @@ class LocationsMenu extends Component {
         this.setState({ filteredPlaces: this.props.places });
         this.setState({ filteredMarkers: this.props.markers });
     }
+
     updateQuery = (query) => {
         this.setState({ query: query.trim()})
         let filteredPlaces;
@@ -40,6 +41,9 @@ class LocationsMenu extends Component {
         }
     }
 
+    selectMarker = () => {
+        console.log("clicked");
+    }
     openSideList = () => {
         document.getElementById("places-list").style.visibility = "visible";
     }
@@ -51,12 +55,12 @@ class LocationsMenu extends Component {
         return(
             <div>
                 <div id="places-list" className="locations-list">
-                    <a className="close-button" onClick={this.closeSideList}>&times;</a>
+                    <a className="close-button" onClick={ this.closeSideList }>&times;</a>
                     <form>
                         <input type="text" name="search" placeholder="filter places" value={ this.state.query } onChange={ (event) => this.updateQuery(event.target.value) }/>
                     </form>
                     {this.state.filteredPlaces.map(place =>
-                        <a className="list-item" key={place.title}> { place.title } </a> 
+                        <li className="list-item" key={place.title} onClick={ this.selectMarker }> { place.title } </li> 
                     )}
                 </div>
                 <div className="nav-bar">

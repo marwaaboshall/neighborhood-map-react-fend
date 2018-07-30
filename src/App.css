@@ -48,7 +48,7 @@ html, body, .App, .map-container, #root {
 .locations-list form {
   text-align: center;
 }
-.locations-list a {
+.locations-list li {
   padding: 10px 10px 10px 10px;
   text-decoration: none;
   font-size: 16px;
@@ -60,7 +60,7 @@ html, body, .App, .map-container, #root {
 .locations-list .list-item {
   border-bottom: 1px solid gray;
 }
-.locations-list a:hover {
+.locations-list li:hover {
   color: gray;
 }
 
