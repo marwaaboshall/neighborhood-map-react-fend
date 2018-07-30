@@ -17,12 +17,11 @@ class LocationsMenu extends Component {
         this.setState({ query: query.trim()})
         let filteredPlaces;
         let filteredMarkers;
-
+        this.EnableMarkers(this.props.markers, false);
         if (query) {
             const match = new RegExp(escapeRegExp(query), 'i');
             filteredPlaces = this.props.places.filter((location) => match.test(location.title));
             filteredMarkers = this.props.markers.filter((marker) => match.test(marker.title));
-            this.EnableMarkers(this.props.markers, false);
             this.EnableMarkers(filteredMarkers, true);
         } else {
             filteredPlaces = this.props.places;

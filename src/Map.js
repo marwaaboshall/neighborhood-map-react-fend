@@ -27,13 +27,14 @@ class Map extends Component {
         for (let i = 0; i < this.props.mapLocations.length; i++) {
             let position = this.props.mapLocations[i].location;
             let title = this.props.mapLocations[i].title;
+            let id = this.props.mapLocations[i].id;
 
-            var marker = new window.google.maps.Marker({
+            let marker = new window.google.maps.Marker({
                 position: position,
                 map: map,
                 title: title,
                 animation: window.google.maps.Animation.DROP,
-                id: i
+                id: id
             });
             this.setState({ marker: marker });
             
@@ -47,9 +48,6 @@ class Map extends Component {
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
             infowindow.setContent('<div>' + marker.title + '</div>');
-            // infowindow.addListener('closeclick', function() {
-            //     infowindow.setMarker(null);
-            // });
             infowindow.open(this.state.map, marker);
         }
     }
