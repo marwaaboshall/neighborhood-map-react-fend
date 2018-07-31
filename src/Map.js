@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import LocationsMenu from './LocationsMenu';
+import PropTypes from 'prop-types';
 
 class Map extends Component {
 
     state = {
-        map: '',
+        map: {},
         marker: '',
-        infoWindow: '',
+        infoWindow: {},
         placeData: '',
         markers: []
-        
     }
-
+    static propTypes = {
+        mapLocations: PropTypes.array.isRequired
+    }
     componentDidMount() {
         window.initMap = this.initMap;
     }
@@ -81,7 +83,7 @@ class Map extends Component {
     }
 
     getLocationData(lat, lng, marker) {
-        fetch('https://api.foursquare.com/v2/venues/search?ll='+lat+','+lng+'&client_id=AEAWOHKH311VIKVSZKQGQHUO311JT4IZLGVFPVHQS5UV2UID&client_secret=QZK22ZH5YEDKOQGUD0NKEJU5XUWJIKBKER04JK434DSCPJJV&v=20180730')
+        fetch('https://api.foursquare.com/v2/venues/search?ll='+lat+','+lng+'&client_id=QFUEJW0W4OAFK2DICKVF5QDURRMZZKM2GZ3ZLXXI5YM05UZR&client_secret=TZPN2FQYSDN50GHODWHVAZGSAPE0I2MMPPCICUASNJTRVCG3&v=20180730')
         .then((res) => {
             return res.json();
         })

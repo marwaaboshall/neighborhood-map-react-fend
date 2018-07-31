@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
+import PropTypes from 'prop-types';
 
 class LocationsMenu extends Component {
     state = {
@@ -9,7 +10,13 @@ class LocationsMenu extends Component {
         filteredMarkers: [],
         selectedMarker: ''
     }
-
+    static propTypes = {
+        places: PropTypes.array.isRequired,
+        markers: PropTypes.array.isRequired,
+        enableInfoWindow: PropTypes.func.isRequired,
+        map: PropTypes.object.isRequired,
+        infowindow: PropTypes.object.isRequired
+    }
     componentDidMount() {
         this.setState({ filteredPlaces: this.props.places });
         this.setState({ filteredMarkers: this.props.markers });
