@@ -69,15 +69,23 @@ class LocationsMenu extends Component {
         return(
             <div>
                 <div id="places-list" className="locations-list">
-                    <a className="close-button" onClick={ this.closeSideList }>&times;</a>
+                    <a
+                      className="close-button"
+                      onClick={ this.closeSideList }>&times;</a>
                     <form>
-                        <input type="text" name="search" placeholder="filter places" value={ this.state.query } onChange={ (event) => this.updateQuery(event.target.value) }/>
+                        <input
+                          type="text"
+                          name="search"
+                          placeholder="filter places"
+                          value={ this.state.query }
+                          onChange={ (event) => this.updateQuery(event.target.value)
+                        }/>
                     </form>
                     {this.state.filteredPlaces.map(place =>
                         <li
                           className="list-item"
                           key={place.title}
-                          onClick={ () => this.showInfoWindow(place) }> { place.title } 
+                          onClick={ () => this.showInfoWindow(place) }>{ place.title } 
                         </li> 
                     )}
                 </div>

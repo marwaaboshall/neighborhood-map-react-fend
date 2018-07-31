@@ -18,26 +18,26 @@ class Map extends Component {
         window.initMap = this.initMap;
     }
     initMap = () => {
+        const { mapLocations } = this.props;
         let thisBind = this;
         let markers =  [];
         let infowindow = new window.google.maps.InfoWindow();
+        let defaultIcon = this.makeMarkerIcon('da2d7f');        
+        let highlightedIcon = this.makeMarkerIcon('cfd51b');
+
         const map = new window.google.maps.Map(document.getElementById('map'), {
             zoom: 12,
             center: {lat: 52.5162746, lng: 13.3755154}
         });
-
         this.setState({ 
             map: map,
             infoWindow: infowindow
         });
 
-        let defaultIcon = this.makeMarkerIcon('da2d7f');        
-        let highlightedIcon = this.makeMarkerIcon('cfd51b');
-
-        for (let i = 0; i < this.props.mapLocations.length; i++) {
-            let position = this.props.mapLocations[i].location;
-            let title = this.props.mapLocations[i].title;
-            let id = this.props.mapLocations[i].id;
+        for (let i = 0; i < mapLocations.length; i++) {
+            let position = mapLocations[i].location;
+            let title = mapLocations[i].title;
+            let id = mapLocations[i].id;
 
             let marker = new window.google.maps.Marker({
                 position: position,
@@ -88,7 +88,7 @@ class Map extends Component {
         })
         .then((data) => {
             if(!data.response.venues[1].location.address) {
-                data.response.venues[1].location.address = data.response.venues[1].location.lat +"," +data.response.venues[1].location.lng
+                data.response.venues[1].location.address = data.response.venues[1].location.lat +"," +data.response.venues[1].location.lng;
             }
             this.setState({ placeData: data.response.venues[1].name +', ' +  data.response.venues[1].location.address }, () => {
                 marker.customeInfo = this.state.placeData;
@@ -123,7 +123,6 @@ class Map extends Component {
                     enableInfoWindow={this.populateInfoWindow}/>
                  <div id="map" />
             </div>
-           
         )
     }
 }
