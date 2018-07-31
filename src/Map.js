@@ -17,7 +17,6 @@ class Map extends Component {
     componentDidMount() {
         window.initMap = this.initMap;
     }
-
     initMap = () => {
         let thisBind = this;
         let markers =  [];
@@ -68,7 +67,6 @@ class Map extends Component {
             
         }        
     }
-
     populateInfoWindow(marker, infowindow, map) {
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
@@ -83,7 +81,6 @@ class Map extends Component {
         }
         
     }
-
     getLocationData(lat, lng, marker) {
         fetch('https://api.foursquare.com/v2/venues/search?ll='+lat+','+lng+'&client_id=QFUEJW0W4OAFK2DICKVF5QDURRMZZKM2GZ3ZLXXI5YM05UZR&client_secret=TZPN2FQYSDN50GHODWHVAZGSAPE0I2MMPPCICUASNJTRVCG3&v=20180730')
         .then((res) => {
@@ -103,7 +100,6 @@ class Map extends Component {
             });
         });
     }
-
     makeMarkerIcon = (markerColor) => {
         let markerImage = new window.google.maps.MarkerImage(
             'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +

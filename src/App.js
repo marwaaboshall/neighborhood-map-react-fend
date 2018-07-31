@@ -31,7 +31,6 @@ function LoadMapToHead() {
   document.head.appendChild(newScript);
   newScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDWmB3dGaB0hh6-CWcCSI2ldW39iDJAOVE&callback=initMap';
 }
-
 function loadError() {
   document.getElementById("map").innerHTML = "Can't load map";
 }

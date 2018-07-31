@@ -23,7 +23,6 @@ class LocationsMenu extends Component {
             filteredMarkers: this.props.markers
         });
     }
-
     updateQuery = (query) => {
         //closing infowindow if displayed on the screen
         this.props.infowindow.close();
@@ -48,20 +47,17 @@ class LocationsMenu extends Component {
             filteredMarkers: filteredMarkers
         });
     }
-
     EnableMarkers = (markersArr, value) => {
         for (var i = 0; i < markersArr.length; i++) {
             markersArr[i].setVisible(value);
         }
     }
-
     showInfoWindow = (place) => {
         this.props.infowindow.marker = null;
         this.state.filteredMarkers.filter(marker => marker.title === place.title && this.setState({ selectedMarker: marker }, () => {
             this.props.enableInfoWindow(this.state.selectedMarker, this.props.infowindow, this.props.map)
         }));
     }
-
     openSideList = () => {
         document.getElementById("places-list").style.visibility = "visible";
     }
