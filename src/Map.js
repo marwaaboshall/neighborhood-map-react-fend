@@ -14,7 +14,6 @@ class Map extends Component {
 
     componentDidMount() {
         this.initMap();
-        
     }
 
     initMap() {
@@ -55,7 +54,7 @@ class Map extends Component {
     populateInfoWindow(marker, infowindow, map) {
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
-            infowindow.setContent(`<div> ${marker.title} </div><br>
+            infowindow.setContent(`<div> ${marker.title}</div><br>
                 <div><b>Nearby</b></div>
                 <div>${marker.customeInfo}</div>
             `);
@@ -81,7 +80,7 @@ class Map extends Component {
             });
         })
         .catch(err => {
-            this.setState({ placeData: `Failed to retrieve data: ${err}`});
+            this.setState({ placeData: "Data can't be loaded" });
         });
     }
 
