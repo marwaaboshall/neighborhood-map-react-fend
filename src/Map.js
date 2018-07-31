@@ -13,10 +13,10 @@ class Map extends Component {
     }
 
     componentDidMount() {
-        this.initMap();
+        window.initMap = this.initMap;
     }
 
-    initMap() {
+    initMap = () => {
         let thisBind = this;
         let markers =  [];
         let infowindow = new window.google.maps.InfoWindow();
@@ -43,6 +43,7 @@ class Map extends Component {
             
             this.getLocationData(marker.getPosition().lat(), marker.getPosition().lng(), marker);
             marker.customeInfo = this.state.placeData;
+            
             this.setState({ marker: marker });
             this.state.markers.push(marker);
             marker.addListener('click', function () {
@@ -80,7 +81,9 @@ class Map extends Component {
             });
         })
         .catch(err => {
-            this.setState({ placeData: "Data can't be loaded" });
+            this.setState({ placeData: "Data can't be loaded" }, () => {
+                marker.customeInfo = this.state.placeData;
+            });
         });
     }
 

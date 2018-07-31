@@ -9,7 +9,9 @@ class App extends Component {
   state = {
     locations: locations
   }
-
+  componentDidMount() {
+    LoadMapToHead();
+  }
   render() {
     return (
       <div className="App">
@@ -20,3 +22,16 @@ class App extends Component {
 }
 
 export default App;
+
+function LoadMapToHead() {
+  let newScript = document.createElement('script');
+  newScript.onerror = loadError;
+  newScript.type = 'text/javascript';
+  newScript.async = true;
+  document.head.appendChild(newScript);
+  newScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDWmB3dGaB0hh6-CWcCSI2ldW39iDJAOVE&callback=initMap';
+}
+
+function loadError() {
+  document.write("Map can't be loaded");
+}
