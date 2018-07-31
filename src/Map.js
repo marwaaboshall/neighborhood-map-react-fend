@@ -8,8 +8,6 @@ class Map extends Component {
         marker: '',
         infoWindow: '',
         placeData: '',
-        nearbyName: '',
-        nearbyAddress: '',
         markers: []
         
     }
@@ -43,8 +41,10 @@ class Map extends Component {
                 animation: window.google.maps.Animation.DROP,
                 id: id
             });
-            this.setState({ marker: marker });
             
+            this.getLocationData(marker.getPosition().lat(), marker.getPosition().lng(), marker);
+            marker.customeInfo = this.state.placeData;
+            this.setState({ marker: marker });
             this.state.markers.push(marker);
             marker.addListener('click', function () {
                 thisBind.populateInfoWindow(this, infowindow, map);
@@ -53,11 +53,11 @@ class Map extends Component {
         }        
     }
     populateInfoWindow(marker, infowindow, map) {
-        //this.getLocationData(marker.getPosition().lat(), marker.getPosition().lng());
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
             infowindow.setContent(`<div> ${marker.title} </div><br>
                 <div><b>Nearby</b></div>
+                <div>${marker.customeInfo}</div>
             `);
             infowindow.open(map, marker);
             infowindow.addListener('closeclick', function() {
@@ -67,29 +67,19 @@ class Map extends Component {
         
     }
 
-    // populateInfoWindow(marker, infowindow, map) {
-    //     this.getLocationData(marker.getPosition().lat(), marker.getPosition().lng());
-    //     if (infowindow.marker !== marker) {
-    //         infowindow.marker = marker;
-    //         infowindow.setContent(`<div> ${marker.title} </div><br>
-    //             <div><b>Nearby</b></div>
-    //             <div>${this.state.placeData}</div>
-    //         `);
-    //         infowindow.open(map, marker);
-    //     }
-        
-    // }
-
-    getLocationData(lat, lng) {
+    getLocationData(lat, lng, marker) {
         fetch('https://api.foursquare.com/v2/venues/search?ll='+lat+','+lng+'&client_id=AEAWOHKH311VIKVSZKQGQHUO311JT4IZLGVFPVHQS5UV2UID&client_secret=QZK22ZH5YEDKOQGUD0NKEJU5XUWJIKBKER04JK434DSCPJJV&v=20180730')
         .then((res) => {
             return res.json();
         })
         .then((data) => {
-            this.setState({ nearbyName: data.response.venues[1].name }, () => {
-                console.log(this.state.nearbyName);
+            console.log(data);
+            if(!data.response.venues[1].location.address) {
+                data.response.venues[1].location.address = data.response.venues[1].location.lat +"," +data.response.venues[1].location.lng
+            }
+            this.setState({ placeData: data.response.venues[1].name +', ' +  data.response.venues[1].location.address }, () => {
+                marker.customeInfo = this.state.placeData;
             });
-            this.setState({ placeData: data.response.venues[1].name +', ' +  data.response.venues[1].location.address});
         })
         .catch(err => {
             console.log(err);

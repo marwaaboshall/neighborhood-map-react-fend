@@ -45,6 +45,7 @@ class LocationsMenu extends Component {
     }
 
     showInfoWindow = (place) => {
+        this.props.infowindow.marker = null;
         this.state.filteredMarkers.filter(marker => marker.title === place.title && this.setState({ currentMarker: marker }, () => {
             this.props.enableInfoWindow(this.state.currentMarker, this.props.infowindow, this.props.map)
         }));
