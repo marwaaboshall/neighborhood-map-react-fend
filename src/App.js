@@ -33,5 +33,5 @@ function LoadMapToHead() {
 }
 
 function loadError() {
-  document.write("Map can't be loaded");
+  document.getElementById("map").innerHTML = "Can't load map";
 }
