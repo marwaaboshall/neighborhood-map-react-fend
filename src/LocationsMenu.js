@@ -7,7 +7,7 @@ class LocationsMenu extends Component {
         query: '',
         filteredPlaces: [],
         filteredMarkers: [],
-        currentMarker: ''
+        selectedMarker: ''
     }
 
     componentDidMount() {
@@ -46,8 +46,8 @@ class LocationsMenu extends Component {
 
     showInfoWindow = (place) => {
         this.props.infowindow.marker = null;
-        this.state.filteredMarkers.filter(marker => marker.title === place.title && this.setState({ currentMarker: marker }, () => {
-            this.props.enableInfoWindow(this.state.currentMarker, this.props.infowindow, this.props.map)
+        this.state.filteredMarkers.filter(marker => marker.title === place.title && this.setState({ selectedMarker: marker }, () => {
+            this.props.enableInfoWindow(this.state.selectedMarker, this.props.infowindow, this.props.map)
         }));
     }
 
@@ -75,7 +75,7 @@ class LocationsMenu extends Component {
                     )}
                 </div>
                 <div className="nav-bar">
-                    <span onClick={this.openSideList}>&#9776; open</span>
+                    <span onClick={this.openSideList}>&#9776; Filter Places</span>
                 </div>
             </div>
         )

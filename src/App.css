@@ -2,6 +2,7 @@ html, body, .App, .map-container, #root {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 #map {
@@ -12,7 +13,7 @@ html, body, .App, .map-container, #root {
 }
 
 .nav-bar {
-  background: black;
+  background: #282135;
   color: white;
   width: 100%;
   height: 50px;
@@ -25,7 +26,7 @@ html, body, .App, .map-container, #root {
   color: white;
 }
 .nav-bar span:hover {
-  color: gray;
+  color: #cfd51b;
 }
 
 .locations-list {
@@ -36,13 +37,16 @@ html, body, .App, .map-container, #root {
   width: 400px;
   position: fixed;
   z-index: 1;
-  background-color: black;
+  background-color: #282135;
   overflow-x: hidden;
   transition: 0.2s;
 }
 .locations-list a {
   color: white;
   cursor: pointer;
+}
+.locations-list a:hover {
+  color: #cfd51b;
 }
 .locations-list input {
   padding: 10px 10px 10px 10px;
@@ -66,7 +70,7 @@ html, body, .App, .map-container, #root {
   border-bottom: 1px solid gray;
 }
 .locations-list li:hover {
-  color: gray;
+  color: #cfd51b;
 }
 
 .locations-list .close-button {

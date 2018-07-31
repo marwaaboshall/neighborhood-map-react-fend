@@ -28,6 +28,9 @@ class Map extends Component {
         this.setState({ map: map });
         this.setState({ infoWindow: infowindow});
 
+        let defaultIcon = this.makeMarkerIcon('da2d7f');        
+        let highlightedIcon = this.makeMarkerIcon('cfd51b');
+
         for (let i = 0; i < this.props.mapLocations.length; i++) {
             let position = this.props.mapLocations[i].location;
             let title = this.props.mapLocations[i].title;
@@ -37,6 +40,7 @@ class Map extends Component {
                 position: position,
                 map: map,
                 title: title,
+                icon: defaultIcon,
                 animation: window.google.maps.Animation.DROP,
                 id: id
             });
@@ -46,12 +50,21 @@ class Map extends Component {
             
             this.setState({ marker: marker });
             this.state.markers.push(marker);
+
             marker.addListener('click', function () {
                 thisBind.populateInfoWindow(this, infowindow, map);
+            });
+
+            marker.addListener('mouseover', function() {
+                this.setIcon(highlightedIcon);
+            });
+            marker.addListener('mouseout', function() {
+                this.setIcon(defaultIcon);
             });
             
         }        
     }
+
     populateInfoWindow(marker, infowindow, map) {
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
@@ -85,6 +98,18 @@ class Map extends Component {
                 marker.customeInfo = this.state.placeData;
             });
         });
+    }
+
+    makeMarkerIcon = (markerColor) => {
+        let markerImage = new window.google.maps.MarkerImage(
+            'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+            '|40|_|%E2%80%A2',
+            new window.google.maps.Size(24, 39),
+            new window.google.maps.Point(0, 0),
+            new window.google.maps.Point(10, 34),
+            new window.google.maps.Size(24, 39)
+        );
+        return markerImage;
     }
 
     render() {
