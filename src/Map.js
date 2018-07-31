@@ -73,7 +73,6 @@ class Map extends Component {
             return res.json();
         })
         .then((data) => {
-            console.log(data);
             if(!data.response.venues[1].location.address) {
                 data.response.venues[1].location.address = data.response.venues[1].location.lat +"," +data.response.venues[1].location.lng
             }
@@ -82,7 +81,6 @@ class Map extends Component {
             });
         })
         .catch(err => {
-            console.log(err);
             this.setState({ placeData: `Failed to retrieve data: ${err}`});
         });
     }
