@@ -6,12 +6,17 @@ class Map extends Component {
     state = {
         map: '',
         marker: '',
-        markers: [],
-        infoWindow: ''
+        infoWindow: '',
+        placeData: '',
+        nearbyName: '',
+        nearbyAddress: '',
+        markers: []
+        
     }
 
     componentDidMount() {
         this.initMap();
+        
     }
 
     initMap() {
@@ -20,7 +25,7 @@ class Map extends Component {
         let infowindow = new window.google.maps.InfoWindow();
         const map = new window.google.maps.Map(document.getElementById('map'), {
             zoom: 12,
-            center: {lat: 40.7413549, lng: -73.9980244}
+            center: {lat: 52.5162746, lng: 13.3755154}
         });
 
         this.setState({ map: map });
@@ -44,14 +49,52 @@ class Map extends Component {
             marker.addListener('click', function () {
                 thisBind.populateInfoWindow(this, infowindow, map);
             });
+            
         }        
     }
     populateInfoWindow(marker, infowindow, map) {
+        //this.getLocationData(marker.getPosition().lat(), marker.getPosition().lng());
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
-            infowindow.setContent('<div>' + marker.title + '</div>');
+            infowindow.setContent(`<div> ${marker.title} </div><br>
+                <div><b>Nearby</b></div>
+            `);
             infowindow.open(map, marker);
+            infowindow.addListener('closeclick', function() {
+                infowindow.marker = null;
+            });
         }
+        
+    }
+
+    // populateInfoWindow(marker, infowindow, map) {
+    //     this.getLocationData(marker.getPosition().lat(), marker.getPosition().lng());
+    //     if (infowindow.marker !== marker) {
+    //         infowindow.marker = marker;
+    //         infowindow.setContent(`<div> ${marker.title} </div><br>
+    //             <div><b>Nearby</b></div>
+    //             <div>${this.state.placeData}</div>
+    //         `);
+    //         infowindow.open(map, marker);
+    //     }
+        
+    // }
+
+    getLocationData(lat, lng) {
+        fetch('https://api.foursquare.com/v2/venues/search?ll='+lat+','+lng+'&client_id=AEAWOHKH311VIKVSZKQGQHUO311JT4IZLGVFPVHQS5UV2UID&client_secret=QZK22ZH5YEDKOQGUD0NKEJU5XUWJIKBKER04JK434DSCPJJV&v=20180730')
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+            this.setState({ nearbyName: data.response.venues[1].name }, () => {
+                console.log(this.state.nearbyName);
+            });
+            this.setState({ placeData: data.response.venues[1].name +', ' +  data.response.venues[1].location.address});
+        })
+        .catch(err => {
+            console.log(err);
+            this.setState({ placeData: `Failed to retrieve data: ${err}`});
+        });
     }
 
     render() {

@@ -1,42 +1,50 @@
 [
     {
-        "title": "Park Ave Penthouse",
+        "title": "Brandenburg Gate",
         "location": {
-            "lat": 40.7413549,
-            "lng": -73.9980244
+            "lat": 52.5162746,
+            "lng": 13.3755154
         },
         "id": 1
     },
     {
-        "title": "Chelsea Loft",
+        "title": "Tiergarten",
         "location": {
-            "lat": 40.7444883,
-            "lng": -73.9949465
+            "lat": 52.5107805,
+            "lng": 13.3363352
         },
         "id": 2
     },
     {
-        "title": "Union Square Open Floor Plan",
+        "title": "East Side Gallery",
         "location": {
-            "lat": 40.7347062,
-            "lng": -73.9895759
+            "lat": 52.5054011,
+            "lng": 13.43636
         },
         "id": 3
     },
     {
-        "title": "East Village Hip Studio",
+        "title": "Museum Island",
         "location": {
-            "lat": 40.7281777,
-            "lng": -74.0089934
+            "lat": 52.5168836,
+            "lng": 13.3933862
         },
         "id": 4
     },
     {
-        "title": "Newyork Health and Racquet Club",
+        "title": "Mall of Berlin",
         "location": {
-            "lat": 40.742079,
-            "lng": -73.99251
+            "lat": 52.5105092,
+            "lng": 13.3788565
         },
         "id": 5
+    },
+    {
+        "title": "Bundestag",
+        "location": {
+            "lat": 52.5182798,
+            "lng": 13.3735008
+        },
+        "id": 6
     }
 ]
