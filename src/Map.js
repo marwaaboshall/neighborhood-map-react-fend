@@ -27,8 +27,10 @@ class Map extends Component {
             center: {lat: 52.5162746, lng: 13.3755154}
         });
 
-        this.setState({ map: map });
-        this.setState({ infoWindow: infowindow});
+        this.setState({ 
+            map: map,
+            infoWindow: infowindow
+        });
 
         let defaultIcon = this.makeMarkerIcon('da2d7f');        
         let highlightedIcon = this.makeMarkerIcon('cfd51b');

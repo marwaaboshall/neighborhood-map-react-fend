@@ -18,8 +18,10 @@ class LocationsMenu extends Component {
         infowindow: PropTypes.object.isRequired
     }
     componentDidMount() {
-        this.setState({ filteredPlaces: this.props.places });
-        this.setState({ filteredMarkers: this.props.markers });
+        this.setState({ 
+            filteredPlaces: this.props.places,
+            filteredMarkers: this.props.markers
+        });
     }
 
     updateQuery = (query) => {
@@ -41,8 +43,10 @@ class LocationsMenu extends Component {
         }
 
         filteredPlaces.sort(sortBy('name'));
-        this.setState({ filteredPlaces });
-        this.setState({ filteredMarkers });
+        this.setState({ 
+            filteredPlaces: filteredPlaces,
+            filteredMarkers: filteredMarkers
+        });
     }
 
     EnableMarkers = (markersArr, value) => {
