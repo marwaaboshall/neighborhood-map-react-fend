@@ -16,6 +16,7 @@ class Map extends Component {
     }
     componentDidMount() {
         window.initMap = this.initMap;
+        this.handleIframe();
     }
     initMap = () => {
         const { mapLocations } = this.props;
@@ -121,7 +122,15 @@ class Map extends Component {
         );
         return markerImage;
     }
-
+    handleIframe() {
+        window.addEventListener('load', (event) => {
+            let iframeElement = document.querySelector('iframe');
+            if(iframeElement) {
+              iframeElement.title = 'Map iframe';
+              iframeElement.tabIndex = -1;
+            }
+        });
+    }
     render() {
         return (
             <div className="map-container">

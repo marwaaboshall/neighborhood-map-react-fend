@@ -95,6 +95,7 @@ class LocationsMenu extends Component {
                           onChange={ (event) => this.updateQuery(event.target.value)
                         }/>
                     </form>
+                    <ul aria-label="Places List">
                     {this.state.filteredPlaces.map(place =>
                         <li
                           aria-label={`${place.title} location`}
@@ -103,6 +104,7 @@ class LocationsMenu extends Component {
                           onClick={ () => this.showInfoWindow(place) }>{ place.title } 
                         </li> 
                     )}
+                    </ul>
                 </div>
                 <div className="nav-bar" aria-label="Neighborhood map navigation bar">
                     <span 

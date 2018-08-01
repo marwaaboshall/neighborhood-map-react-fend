@@ -4,6 +4,10 @@ html, body, .App, .map-container, #root {
   overflow-x: hidden;
   font-family: 'Ubuntu', sans-serif;
 }
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
 
 #map {
   bottom: 0px;
