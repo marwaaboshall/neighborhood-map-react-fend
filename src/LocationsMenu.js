@@ -59,7 +59,7 @@ class LocationsMenu extends Component {
     }
     // a function that sets marker visibilty to true or false depending on the value passed to it
     EnableMarkers = (markersArr, value) => {
-        for (var i = 0; i < markersArr.length; i++) {
+        for (let i = 0; i < markersArr.length; i++) {
             markersArr[i].setVisible(value);
         }
     }
