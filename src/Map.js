@@ -27,7 +27,7 @@ class Map extends Component {
         let defaultIcon = this.makeMarkerIcon('da2d7f');        
         let highlightedIcon = this.makeMarkerIcon('cfd51b');
         let pressedIcon = this.makeMarkerIcon('95C8B7');
-
+        // creating map element
         const map = new window.google.maps.Map(document.getElementById('map'), {
             zoom: 12,
             center: {lat: 52.5162746, lng: 13.3755154}
@@ -36,7 +36,7 @@ class Map extends Component {
             map: map,
             infoWindow: infowindow
         });
-
+        // looping through the locations and creating a new marker for each location
         for (let i = 0; i < mapLocations.length; i++) {
             let position = mapLocations[i].location;
             let title = mapLocations[i].title;
@@ -50,17 +50,17 @@ class Map extends Component {
                 animation: window.google.maps.Animation.DROP,
                 id: id
             });
-            
+            // retrieving location data according to the location lat and lng
             this.getLocationData(marker.getPosition().lat(), marker.getPosition().lng(), marker);
             marker.customeInfo = this.state.placeData;
             
             this.setState({ marker: marker });
             this.state.markers.push(marker);
-
+            // marker click listener to display infowindow with the data about the location
             marker.addListener('click', function () {
                 thisBind.populateInfoWindow(this, infowindow, map, thisBind.state.prevMrker);
             });
-
+            // marker mouseover and mouseover events to handle marker color according to the event
             marker.addListener('mouseover', function() {
                 this.setIcon(highlightedIcon);
             });
@@ -70,8 +70,8 @@ class Map extends Component {
             
         }        
     }
-    // a function that handles opening infowindow with the datailes of the location
-    // also, handles the opened marker animation and infowindow close event
+    // a function that handles opening an infowindow with the datails of the location
+    // also, handles the opened marker animation and infowindow close event listener
     populateInfoWindow = (marker, infowindow, map, prevMarker) => {
         let thisBind = this;
         if(prevMarker && prevMarker !== marker) {
@@ -95,7 +95,6 @@ class Map extends Component {
         }
         
     }
-
     // get location data depending on the lat and lng of the location. making a request
     // to foursquare api and get the first nearby place of the array of places.
     getLocationData(lat, lng, marker) {

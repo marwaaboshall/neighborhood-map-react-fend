@@ -28,7 +28,7 @@ class LocationsMenu extends Component {
     updateQuery = (query) => {
         let filteredPlaces;
         let filteredMarkers;
-        // setting marker animation to null the user is searching for a place
+        // setting marker animation to null if the user is searching for a place
         if(this.props.prevMarker) {
             this.props.prevMarker.setAnimation(null);
         }
@@ -37,7 +37,7 @@ class LocationsMenu extends Component {
         this.setState({ query: query.trim()})
         
         this.EnableMarkers(this.props.markers, false);
-        // matching filtered places and marker according to the quare, display all places and marker
+        // matching filtered places and marker according to the search quary, display all places and marker
         // if the query is empty
         if (query) {
             const match = new RegExp(escapeRegExp(query), 'i');
@@ -51,6 +51,7 @@ class LocationsMenu extends Component {
         }
 
         filteredPlaces.sort(sortBy('name'));
+        // setting palaces and markers to the new filtered values
         this.setState({ 
             filteredPlaces: filteredPlaces,
             filteredMarkers: filteredMarkers
