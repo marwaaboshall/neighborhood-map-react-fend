@@ -15,7 +15,8 @@ class LocationsMenu extends Component {
         markers: PropTypes.array.isRequired,
         enableInfoWindow: PropTypes.func.isRequired,
         map: PropTypes.object.isRequired,
-        infowindow: PropTypes.object.isRequired
+        infowindow: PropTypes.object.isRequired,
+        prevMarker: PropTypes.any.isRequired
     }
     componentDidMount() {
         this.setState({ 
@@ -24,11 +25,14 @@ class LocationsMenu extends Component {
         });
     }
     updateQuery = (query) => {
-        //closing infowindow if displayed on the screen
-        this.props.infowindow.close();
-        this.setState({ query: query.trim()})
         let filteredPlaces;
         let filteredMarkers;
+        //closing infowindow if displayed on the screen
+        this.props.prevMarker.setAnimation(null);
+        this.props.infowindow.close();
+
+        this.setState({ query: query.trim()})
+        
         this.EnableMarkers(this.props.markers, false);
         if (query) {
             const match = new RegExp(escapeRegExp(query), 'i');

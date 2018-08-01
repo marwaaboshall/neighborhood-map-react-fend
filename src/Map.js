@@ -70,11 +70,12 @@ class Map extends Component {
     }
     populateInfoWindow = (marker, infowindow, map, prevMarker) => {
         let thisBind = this;
-        if(prevMarker && prevMarker!== marker) {
+        if(prevMarker && prevMarker !== marker) {
             prevMarker.setAnimation(null);
         }
         this.setState({ prevMrker: marker });
         marker.setAnimation(window.google.maps.Animation.BOUNCE);
+
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
             infowindow.setContent(`<div> ${marker.title}</div><br>
