@@ -88,9 +88,11 @@ class LocationsMenu extends Component {
                   aria-labelledby="openbutton">
                     <span
                       className="close-button"
-                      onClick={ this.closeSideList }
+                      onClick={this.closeSideList}
+                      onKeyPress={this.closeSideList}
                       aria-label="Places side list close button"
-                      role="button">&times;
+                      role="button"
+                      tabIndex="0">&times;
                     </span>
                     <form>
                         <input
@@ -105,10 +107,13 @@ class LocationsMenu extends Component {
                     <ul aria-label="Places List">
                     {this.state.filteredPlaces.map(place =>
                         <li
+                          tabIndex="0"
                           aria-label={`${place.title} location`}
                           className="list-item"
                           key={place.title}
-                          onClick={ () => this.showInfoWindow(place) }>{ place.title } 
+                          role="button"
+                          onClick={() => this.showInfoWindow(place)}
+                          onKeyPress= {() => this.showInfoWindow(place)}>{ place.title }
                         </li> 
                     )}
                     </ul>
@@ -118,9 +123,12 @@ class LocationsMenu extends Component {
                   aria-label="Neighborhood map navigation bar">
                     <span 
                        onClick={this.openSideList}
+                       onKeyPress={this.openSideList}
                        aria-label="Filter Places side menu open button"
+                       id="openbutton"
+                       tabIndex="0"
                        role="button"
-                       id="openbutton">&#9776; Filter Places
+                       >&#9776; Filter Places
                     </span>
                 </div>
             </div>
