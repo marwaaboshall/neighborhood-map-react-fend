@@ -54,8 +54,9 @@ class LocationsMenu extends Component {
     }
     showInfoWindow = (place) => {
         this.props.infowindow.marker = null;
-        this.state.filteredMarkers.filter(marker => marker.title === place.title && this.setState({ selectedMarker: marker }, () => {
-            this.props.enableInfoWindow(this.state.selectedMarker, this.props.infowindow, this.props.map)
+        this.state.filteredMarkers.filter(marker => 
+            marker.title === place.title && this.setState({ selectedMarker: marker }, () => {
+            this.props.enableInfoWindow(this.state.selectedMarker, this.props.infowindow, this.props.map);
         }));
     }
     openSideList = () => {

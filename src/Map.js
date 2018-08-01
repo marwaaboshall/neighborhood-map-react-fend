@@ -3,7 +3,6 @@ import LocationsMenu from './LocationsMenu';
 import PropTypes from 'prop-types';
 
 class Map extends Component {
-
     state = {
         map: {},
         marker: '',
@@ -24,6 +23,7 @@ class Map extends Component {
         let infowindow = new window.google.maps.InfoWindow();
         let defaultIcon = this.makeMarkerIcon('da2d7f');        
         let highlightedIcon = this.makeMarkerIcon('cfd51b');
+        let pressedIcon = this.makeMarkerIcon('95C8B7');
 
         const map = new window.google.maps.Map(document.getElementById('map'), {
             zoom: 12,
@@ -66,6 +66,13 @@ class Map extends Component {
             });
             
         }        
+    }
+    toggleAnimation(marker) {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        }
     }
     populateInfoWindow(marker, infowindow, map) {
         if (infowindow.marker !== marker) {
@@ -120,11 +127,11 @@ class Map extends Component {
                     markers={this.state.markers}
                     map={this.state.map}
                     infowindow={this.state.infoWindow}
-                    enableInfoWindow={this.populateInfoWindow}/>
+                    enableInfoWindow={this.populateInfoWindow}
+                    toggleAnimation={this.toggleAnimation}/>
                  <div id="map" />
             </div>
         )
     }
 }
-
 export default Map;

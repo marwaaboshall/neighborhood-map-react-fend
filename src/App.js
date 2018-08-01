@@ -5,7 +5,6 @@ import Map from './Map';
 import * as locations from './locations'
 
 class App extends Component {
-  
   state = {
     locations: locations
   }
@@ -20,7 +19,6 @@ class App extends Component {
     )
   }
 }
-
 export default App;
 
 function LoadMapToHead() {
