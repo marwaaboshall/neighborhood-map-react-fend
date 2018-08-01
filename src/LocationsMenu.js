@@ -73,6 +73,10 @@ class LocationsMenu extends Component {
     // functions to handle the visibility of the side menu
     openSideList = () => {
         document.getElementById("places-list").style.visibility = "visible";
+        // setting the focus to the close button of the side menu to reset the navigation
+        window.setTimeout(function () {
+            document.getElementById("close").focus()
+        }, 200);
     }
     closeSideList = () => {
         document.getElementById("places-list").style.visibility = "hidden";
@@ -87,6 +91,7 @@ class LocationsMenu extends Component {
                   aria-label="Places side list"
                   aria-labelledby="openbutton">
                     <span
+                      id="close"
                       className="close-button"
                       onClick={this.closeSideList}
                       onKeyPress={this.closeSideList}
