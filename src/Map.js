@@ -15,6 +15,7 @@ class Map extends Component {
         mapLocations: PropTypes.array.isRequired
     }
     componentDidMount() {
+        // initializing Map after mounting component
         window.initMap = this.initMap;
         this.handleIframe();
     }
@@ -69,6 +70,8 @@ class Map extends Component {
             
         }        
     }
+    // a function that handles opening infowindow with the datailes of the location
+    // also, handles the opened marker animation and infowindow close event
     populateInfoWindow = (marker, infowindow, map, prevMarker) => {
         let thisBind = this;
         if(prevMarker && prevMarker !== marker) {
@@ -92,6 +95,9 @@ class Map extends Component {
         }
         
     }
+
+    // get location data depending on the lat and lng of the location. making a request
+    // to foursquare api and get the first nearby place of the array of places.
     getLocationData(lat, lng, marker) {
         fetch('https://api.foursquare.com/v2/venues/search?ll='+lat+','+lng+'&client_id=QFUEJW0W4OAFK2DICKVF5QDURRMZZKM2GZ3ZLXXI5YM05UZR&client_secret=TZPN2FQYSDN50GHODWHVAZGSAPE0I2MMPPCICUASNJTRVCG3&v=20180730')
         .then((res) => {
@@ -111,6 +117,8 @@ class Map extends Component {
             });
         });
     }
+
+    // change marker color function
     makeMarkerIcon = (markerColor) => {
         let markerImage = new window.google.maps.MarkerImage(
             'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
@@ -122,6 +130,7 @@ class Map extends Component {
         );
         return markerImage;
     }
+    // adding title to iframe according to aria roles
     handleIframe() {
         window.addEventListener('load', (event) => {
             let iframeElement = document.querySelector('iframe');

@@ -19,6 +19,7 @@ class LocationsMenu extends Component {
         prevMarker: PropTypes.any.isRequired
     }
     componentDidMount() {
+        // setting an initial value for filteredPlaces and filteredMarkers arrays
         this.setState({ 
             filteredPlaces: this.props.places,
             filteredMarkers: this.props.markers
@@ -27,14 +28,17 @@ class LocationsMenu extends Component {
     updateQuery = (query) => {
         let filteredPlaces;
         let filteredMarkers;
-        //closing infowindow if displayed on the screen
+        // setting marker animation to null the user is searching for a place
         if(this.props.prevMarker) {
             this.props.prevMarker.setAnimation(null);
         }
+        // closing infowindow if displayed on the screen
         this.props.infowindow.close();
         this.setState({ query: query.trim()})
         
         this.EnableMarkers(this.props.markers, false);
+        // matching filtered places and marker according to the quare, display all places and marker
+        // if the query is empty
         if (query) {
             const match = new RegExp(escapeRegExp(query), 'i');
             filteredPlaces = this.props.places.filter((location) => match.test(location.title));
@@ -52,6 +56,7 @@ class LocationsMenu extends Component {
             filteredMarkers: filteredMarkers
         });
     }
+    // a function that sets marker visibilty to true or false depending on the value passed to it
     EnableMarkers = (markersArr, value) => {
         for (var i = 0; i < markersArr.length; i++) {
             markersArr[i].setVisible(value);
@@ -64,6 +69,7 @@ class LocationsMenu extends Component {
             this.props.enableInfoWindow(this.state.selectedMarker, this.props.infowindow, this.props.map, this.props.prevMarker);
         }));
     }
+    // functions to handle the visibility of the side menu
     openSideList = () => {
         document.getElementById("places-list").style.visibility = "visible";
     }
@@ -106,7 +112,9 @@ class LocationsMenu extends Component {
                     )}
                     </ul>
                 </div>
-                <div className="nav-bar" aria-label="Neighborhood map navigation bar">
+                <div
+                  className="nav-bar"
+                  aria-label="Neighborhood map navigation bar">
                     <span 
                        onClick={this.openSideList}
                        aria-label="Filter Places side menu open button"

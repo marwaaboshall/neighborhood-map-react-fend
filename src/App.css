@@ -4,6 +4,7 @@ html, body, .App, .map-container, #root {
   overflow-x: hidden;
   font-family: 'Ubuntu', sans-serif;
 }
+
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -25,10 +26,12 @@ ul {
   padding-left: 25px;
   font-size: 20px;
 }
+
 .nav-bar span {
   cursor: pointer;
   color: white;
 }
+
 .nav-bar span:hover {
   color: #cfd51b;
 }
@@ -45,22 +48,27 @@ ul {
   overflow-x: hidden;
   transition: 0.2s;
 }
+
 .locations-list span {
   color: white;
   cursor: pointer;
 }
+
 .locations-list span:hover {
   color: #cfd51b;
 }
+
 .locations-list input {
   padding: 10px 10px 10px 10px;
   width: 92%;
   font-size: 16px;
   border-radius: 5px;
 }
+
 .locations-list form {
   text-align: center;
 }
+
 .locations-list li {
   padding: 10px 10px 10px 10px;
   text-decoration: none;
@@ -70,9 +78,11 @@ ul {
   transition: 0.1s;
   cursor: pointer;
 }
+
 .locations-list .list-item {
   border-bottom: 1px solid gray;
 }
+
 .locations-list li:hover {
   color: #cfd51b;
 }

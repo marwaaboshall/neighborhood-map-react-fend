@@ -21,6 +21,7 @@ class App extends Component {
 }
 export default App;
 
+// a function that creates a script element and add it to the head of the page to load google maps api
 function LoadMapToHead() {
   let newScript = document.createElement('script');
   newScript.onerror = loadError;
