@@ -8,7 +8,8 @@ class Map extends Component {
         marker: '',
         infoWindow: {},
         placeData: '',
-        markers: []
+        markers: [],
+        prevMrker: ''
     }
     static propTypes = {
         mapLocations: PropTypes.array.isRequired
@@ -55,7 +56,7 @@ class Map extends Component {
             this.state.markers.push(marker);
 
             marker.addListener('click', function () {
-                thisBind.populateInfoWindow(this, infowindow, map);
+                thisBind.populateInfoWindow(this, infowindow, map, thisBind.state.prevMrker);
             });
 
             marker.addListener('mouseover', function() {
@@ -67,22 +68,23 @@ class Map extends Component {
             
         }        
     }
-    toggleAnimation(marker) {
-        if (marker.getAnimation() !== null) {
-            marker.setAnimation(null);
-        } else {
-            marker.setAnimation(window.google.maps.Animation.BOUNCE);
+    populateInfoWindow = (marker, infowindow, map, prevMarker) => {
+        let thisBind = this;
+        if(prevMarker) {
+            prevMarker.setAnimation(null);
         }
-    }
-    populateInfoWindow(marker, infowindow, map) {
+        this.setState({ prevMrker: marker });
+        marker.setAnimation(window.google.maps.Animation.BOUNCE);
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
             infowindow.setContent(`<div> ${marker.title}</div><br>
                 <div><b>Nearby</b></div>
                 <div>${marker.customeInfo}</div>
+                <div>Foursquare Data</div>
             `);
             infowindow.open(map, marker);
             infowindow.addListener('closeclick', function() {
+                thisBind.state.prevMrker.setAnimation(null);
                 infowindow.marker = null;
             });
         }
@@ -128,7 +130,7 @@ class Map extends Component {
                     map={this.state.map}
                     infowindow={this.state.infoWindow}
                     enableInfoWindow={this.populateInfoWindow}
-                    toggleAnimation={this.toggleAnimation}/>
+                    prevMarker={this.state.prevMrker}/>
                  <div id="map" />
             </div>
         )
