@@ -70,7 +70,7 @@ class Map extends Component {
     }
     populateInfoWindow = (marker, infowindow, map, prevMarker) => {
         let thisBind = this;
-        if(prevMarker) {
+        if(prevMarker && prevMarker!== marker) {
             prevMarker.setAnimation(null);
         }
         this.setState({ prevMrker: marker });
