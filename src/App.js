@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Map mapLocations={ this.state.locations } />
+        <Map mapLocations={ this.state.locations }/>
       </div>
     )
   }

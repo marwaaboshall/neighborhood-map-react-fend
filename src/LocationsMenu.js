@@ -74,11 +74,16 @@ class LocationsMenu extends Component {
     render() {
         return(
             <div>
-                <div id="places-list" className="locations-list">
+                <div
+                  id="places-list"
+                  className="locations-list"
+                  aria-label="Places side list"
+                  aria-labelledby="openbutton">
                     <span
                       className="close-button"
                       onClick={ this.closeSideList }
-                      aria-label="Places list close button">&times;
+                      aria-label="Places side list close button"
+                      role="button">&times;
                     </span>
                     <form>
                         <input
@@ -86,24 +91,25 @@ class LocationsMenu extends Component {
                           name="search"
                           placeholder="filter places"
                           value={ this.state.query }
-                          aria-label="Filter places input field"
+                          aria-label="Places side list filter field"
                           onChange={ (event) => this.updateQuery(event.target.value)
                         }/>
                     </form>
                     {this.state.filteredPlaces.map(place =>
                         <li
-                          aria-label={`${place.title} list item`}
+                          aria-label={`${place.title} location`}
                           className="list-item"
                           key={place.title}
                           onClick={ () => this.showInfoWindow(place) }>{ place.title } 
                         </li> 
                     )}
                 </div>
-                <div className="nav-bar">
+                <div className="nav-bar" aria-label="Neighborhood map navigation bar">
                     <span 
                        onClick={this.openSideList}
                        aria-label="Filter Places side menu open button"
-                       role="button">&#9776; Filter Places
+                       role="button"
+                       id="openbutton">&#9776; Filter Places
                     </span>
                 </div>
             </div>

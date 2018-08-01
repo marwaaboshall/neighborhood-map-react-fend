@@ -132,7 +132,10 @@ class Map extends Component {
                     infowindow={this.state.infoWindow}
                     enableInfoWindow={this.populateInfoWindow}
                     prevMarker={this.state.prevMrker}/>
-                 <div id="map" />
+                 <div 
+                    id="map"
+                    role="application"
+                    aria-label="Map with interest points"/>
             </div>
         )
     }
