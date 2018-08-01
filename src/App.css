@@ -41,11 +41,11 @@ html, body, .App, .map-container, #root {
   overflow-x: hidden;
   transition: 0.2s;
 }
-.locations-list a {
+.locations-list span {
   color: white;
   cursor: pointer;
 }
-.locations-list a:hover {
+.locations-list span:hover {
   color: #cfd51b;
 }
 .locations-list input {

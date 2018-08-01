@@ -28,9 +28,10 @@ class LocationsMenu extends Component {
         let filteredPlaces;
         let filteredMarkers;
         //closing infowindow if displayed on the screen
-        this.props.prevMarker.setAnimation(null);
+        if(this.props.prevMarker) {
+            this.props.prevMarker.setAnimation(null);
+        }
         this.props.infowindow.close();
-
         this.setState({ query: query.trim()})
         
         this.EnableMarkers(this.props.markers, false);
@@ -74,20 +75,24 @@ class LocationsMenu extends Component {
         return(
             <div>
                 <div id="places-list" className="locations-list">
-                    <a
+                    <span
                       className="close-button"
-                      onClick={ this.closeSideList }>&times;</a>
+                      onClick={ this.closeSideList }
+                      aria-label="Places list close button">&times;
+                    </span>
                     <form>
                         <input
                           type="text"
                           name="search"
                           placeholder="filter places"
                           value={ this.state.query }
+                          aria-label="Filter places input field"
                           onChange={ (event) => this.updateQuery(event.target.value)
                         }/>
                     </form>
                     {this.state.filteredPlaces.map(place =>
                         <li
+                          aria-label={`${place.title} list item`}
                           className="list-item"
                           key={place.title}
                           onClick={ () => this.showInfoWindow(place) }>{ place.title } 
@@ -95,7 +100,11 @@ class LocationsMenu extends Component {
                     )}
                 </div>
                 <div className="nav-bar">
-                    <span onClick={this.openSideList}>&#9776; Filter Places</span>
+                    <span 
+                       onClick={this.openSideList}
+                       aria-label="Filter Places side menu open button"
+                       role="button">&#9776; Filter Places
+                    </span>
                 </div>
             </div>
         )
