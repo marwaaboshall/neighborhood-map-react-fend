@@ -98,7 +98,7 @@ class Map extends Component {
     // get location data depending on the lat and lng of the location. making a request
     // to foursquare api and get the first nearby place of the array of places.
     getLocationData(lat, lng, marker) {
-        fetch('https://api.foursquare.com/v2/venues/search?ll='+lat+','+lng+'&client_id=QFUEJW0W4OAFK2DICKVF5QDURRMZZKM2GZ3ZLXXI5YM05UZR&client_secret=TZPN2FQYSDN50GHODWHVAZGSAPE0I2MMPPCICUASNJTRVCG3&v=20180730')
+        fetch('https://api.foursquare.com/v2/venues/search?ll='+lat+','+lng+'&client_id=U34VPANGCAV135RM5GDYLKKXPEI31YQ4XNORWHAWQIPORAYV&client_secret=WBEBFPAKIFGZS0L4PMEYWOVRRYT3RYBN21X0YWFEDYYGRUBS&v=20180730')
         .then((res) => {
             return res.json();
         })
